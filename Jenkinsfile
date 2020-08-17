@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'non-fdb-test'
+    }
 
     stages {
         stage('Build') {

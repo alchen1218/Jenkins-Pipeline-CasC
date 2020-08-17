@@ -1,9 +1,3 @@
-properties ([pipelineTriggers([githubPush()])])
-
-node {
-    git url: 'git@github.com:alchen1218/pipeline-jenkinsfile-test.git', branch: 'master'
-}
-
 pipeline {
     agent {
         label 'non-fdb-test'

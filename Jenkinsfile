@@ -21,9 +21,16 @@ pipeline {
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
             }
         }
-        stage('Deploy') {
+        stage('Running in Parallel') {
             steps {
-                echo 'Deploying....'
+                parallel(
+                    a: {
+                        echo "building in parallel 1"
+                    },
+                    b: {
+                        echo "building in parallel 2"
+                    }
+                )
             }
         }
     }

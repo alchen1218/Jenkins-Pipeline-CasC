@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo "Testing...."
                 echo "node_name: ${env.node_name}"
-                sh "echo 'node_label: ${env.node_labels} | awk \'{print ($5)}\''"
+                echo "node_label: ${env.node_labels}"
             }
         }
         stage("Deploy") {

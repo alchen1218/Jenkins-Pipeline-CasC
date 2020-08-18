@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo "Testing...."
                 echo "node_name: ${env.node_name}"
-                echo "node_label: ${env.node_labels.split(' ')[5]}"
+                echo "node_label: ${env.node_labels}.split(' ')[5]"
             }
         }
         stage("Deploy") {

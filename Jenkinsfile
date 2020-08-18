@@ -1,29 +1,29 @@
 pipeline {
     agent {
-        label 'non-fdb-test'
+        label "non-fdb-test"
     }
 
     stages {
-        stage('Build') {
+        stage("Build") {
             steps {
-                echo 'Building....'
-                echo 'node_name: ${env.node_name}'
-                echo 'node_name: ${env.node_label}'
+                echo "Building...."
+                echo "node_name: ${env.node_name}"
+                echo "node_label: ${env.node_label}"
             }
         }
-        stage('Test') {
+        stage("Test") {
             agent { 
-                label 'fdb-test' 
+                label "fdb-test" 
             }
             steps {
-                echo 'Testing....'
-                echo 'node_name: ${env.node_name}'
-                echo 'node_name: ${env.node_label}'
+                echo "Testing...."
+                echo "node_name: ${env.node_name}"
+                echo "node_label: ${env.node_label}"
             }
         }
-        stage('Deploy') {
+        stage("Deploy") {
             steps {
-                echo 'Deploying....'
+                echo "Deploying...."
             }
         }
     }

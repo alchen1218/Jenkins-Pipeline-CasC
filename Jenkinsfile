@@ -6,12 +6,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building...'
+                echo "node_name: ${env.node_name}"
+                echo 'Building....'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing...'
+                echo 'Testing....'
             }
         }
         stage('Deploy') {

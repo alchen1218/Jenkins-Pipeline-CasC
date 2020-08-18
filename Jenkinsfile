@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'non-fdb-test'
+        label 'non-test'
     }
 
     stages {

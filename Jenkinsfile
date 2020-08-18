@@ -7,7 +7,7 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building...."
-                // echo "node_name: ${env.node_name}"
+                echo "node_name: ${env.node_name}"
                 echo "node_label: ${env.node_labels}"
             }
         }
@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
                 echo "Testing...."
-                // echo "node_name: ${env.node_name}"
+                echo "node_name: ${env.node_name}"
                 echo "node_label: ${env.node_labels.split(' ')[5]}"
             }
         }

@@ -17,7 +17,7 @@ pipeline {
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
                 echo "${WORKSPACE}"
                 script {
-                    sh "mkdir -p ${WORKSPACE}/testing"
+                    mkdir -p ${WORKSPACE}/testing
                 }
             }
         }

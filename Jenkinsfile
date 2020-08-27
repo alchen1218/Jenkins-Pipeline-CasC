@@ -16,7 +16,7 @@ pipeline {
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
                 echo "${WORKSPACE}"
-                pwd
+                "pwd"
             }
         }
         stage('Test') {

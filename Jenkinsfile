@@ -28,6 +28,7 @@ pipeline {
                 echo "'Testing....'"
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
+                deleteDir() /* clean up our workspace */
             }
         }
         stage('Running in Parallel') {
@@ -46,7 +47,7 @@ pipeline {
     post {
         always {
             echo 'One way or another, I have finished'
-            // deleteDir() /* clean up our workspace */
+            deleteDir() /* clean up our workspace */
         }
         success {
             echo 'I succeeded!'
@@ -56,21 +57,21 @@ pipeline {
         }
         unstable {
             echo 'I am unstable'
-            // slackSend channel: '#wavefront-slackchannel-placeholder',
-            //       color: 'good',
-            //       message: "The pipeline ${currentBuild.fullDisplayName} is unstable."
+            slackSend channel: '#alan-test-jenkinsfile-pipeline',
+                  color: 'good',
+                  message: "The pipeline ${currentBuild.fullDisplayName} is unstable."
         }
         failure {
             echo 'I failed'
-            // slackSend channel: '#wavefront-slackchannel-placeholder',
-            //       color: 'good',
-            //       message: "The pipeline ${currentBuild.fullDisplayName} has failed."
+            slackSend channel: '#alan-test-jenkinsfile-pipeline',
+                  color: 'good',
+                  message: "The pipeline ${currentBuild.fullDisplayName} has failed."
         }
         changed {
             echo 'Things were different before...'
-            // slackSend channel: '#wavefront-slackchannel-placeholder',
-            //       color: 'good',
-            //       message: "Something in the pipeline ${currentBuild.fullDisplayName} has changed."
+            slackSend channel: '#alan-test-jenkinsfile-pipeline',
+                  color: 'good',
+                  message: "Something in the pipeline ${currentBuild.fullDisplayName} has changed."
         }
     }
 }

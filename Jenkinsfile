@@ -13,11 +13,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                
-                echo 'Building....'
-                echo "NODE NAME: ${env.NODE_NAME}"
-                echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
-                echo "${WORKSPACE}"
+                script {
+                    echo 'Building....'
+                    echo "NODE NAME: ${env.NODE_NAME}"
+                    echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
+                    echo "${WORKSPACE}"
+                }
             }
         }
         stage('Test') {
@@ -57,13 +58,13 @@ pipeline {
         unstable {
             echo 'I am unstable'
             slackSend channel: '#alan-test-jenkinsfile-pipeline',
-                  color: 'good',
+                  color: 'bad',
                   message: "The pipeline ${currentBuild.fullDisplayName} is unstable."
         }
         failure {
             echo 'I failed'
             slackSend channel: '#alan-test-jenkinsfile-pipeline',
-                  color: 'good',
+                  color: 'bad',
                   message: "The pipeline ${currentBuild.fullDisplayName} has failed."
         }
         // changed {

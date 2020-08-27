@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir("${env.WORKSPACE}) {
+                dir("${env.WORKSPACE}") {
                     sh "pwd"
                 }
                 echo 'Building....'

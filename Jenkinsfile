@@ -34,4 +34,34 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            echo 'One way or another, I have finished'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'I succeeded!'
+            slackSend channel: '#wavefront-slackchannel-placeholder',
+                  color: 'good',
+                  message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+        }
+        unstable {
+            echo 'I am unstable'
+            slackSend channel: '#wavefront-slackchannel-placeholder',
+                  color: 'good',
+                  message: "The pipeline ${currentBuild.fullDisplayName} is unstable."
+        }
+        failure {
+            echo 'I failed'
+            slackSend channel: '#wavefront-slackchannel-placeholder',
+                  color: 'good',
+                  message: "The pipeline ${currentBuild.fullDisplayName} has failed."
+        }
+        changed {
+            echo 'Things were different before...'
+            slackSend channel: '#wavefront-slackchannel-placeholder',
+                  color: 'good',
+                  message: "Something in the pipeline ${currentBuild.fullDisplayName} has changed."
+        }
+    }
 }

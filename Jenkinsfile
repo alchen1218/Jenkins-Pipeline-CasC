@@ -4,7 +4,7 @@ pipeline {
     }
 
     stages {
-        stage("Initialization") {
+        stage("Initialization"){
             steps {
                 echo 'Initializing....'
                 buildDescription "Executed @ ${NODE_NAME}"

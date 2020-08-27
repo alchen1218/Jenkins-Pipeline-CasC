@@ -28,7 +28,6 @@ pipeline {
                 echo "'Testing....'"
                 echo "NODE NAME: ${env.NODE_NAME}"
                 echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
-                deleteDir() /* clean up our workspace */
             }
         }
         stage('Running in Parallel') {
@@ -67,11 +66,11 @@ pipeline {
                   color: 'good',
                   message: "The pipeline ${currentBuild.fullDisplayName} has failed."
         }
-        changed {
-            echo 'Things were different before...'
-            slackSend channel: '#alan-test-jenkinsfile-pipeline',
-                  color: 'good',
-                  message: "Something in the pipeline ${currentBuild.fullDisplayName} has changed."
-        }
+        // changed {
+        //     echo 'Things were different before...'
+        //     slackSend channel: '#alan-test-jenkinsfile-pipeline',
+        //           color: 'good',
+        //           message: "Something in the pipeline ${currentBuild.fullDisplayName} has changed."
+        // }
     }
 }

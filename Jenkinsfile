@@ -16,7 +16,9 @@ pipeline {
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
                 echo "${WORKSPACE}"
-                sh "mkdir -p ${WORKSPACE}/testing"
+                script {
+                    sh "mkdir -p ${WORKSPACE}/testing"
+                }
             }
         }
         stage('Test') {

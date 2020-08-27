@@ -12,12 +12,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "mkdir -p ${WORKSPACE}/testing"
+                dir("${env.WORKSPACE}) {
+                    sh "pwd"
+                }
                 echo 'Building....'
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
                 echo "${WORKSPACE}"
-                
             }
         }
         stage('Test') {

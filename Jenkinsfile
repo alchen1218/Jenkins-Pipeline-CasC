@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo 'Initializing....'
                 echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                buildDescription "Executed @ ${env.NODE_NAME.split()[5]}"
+                buildDescription "Executed @ ${env.NODE_LABELS.split()[5]}"
             }
         }
         stage('Build') {

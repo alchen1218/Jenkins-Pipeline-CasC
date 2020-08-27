@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo "Running ${env.JOB_NAME} build ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo 'Building....'
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"

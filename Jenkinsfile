@@ -7,12 +7,13 @@ pipeline {
         stage("Initialization"){
             steps {
                 echo 'Initializing....'
+                echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 buildDescription "Executed @ ${NODE_NAME}"
             }
         }
         stage('Build') {
             steps {
-                echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                
                 echo 'Building....'
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
@@ -49,9 +50,9 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
-            // slackSend channel: '#wavefront-slackchannel-placeholder',
-            //       color: 'good',
-            //       message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+            slackSend channel: '#alan-test-jenkinsfile-pipeline',
+                  color: 'good',
+                  message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
         }
         unstable {
             echo 'I am unstable'

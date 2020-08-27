@@ -4,12 +4,19 @@ pipeline {
     }
 
     stages {
+        stage("Initialization") {
+            steps {
+                buildDescription "Executed @ ${NODE_NAME}"
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building....'
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
-                mkdir non-fdb-workplace
+                script {
+                    mkdir non-fdb-workplace
+                }
             }
         }
         stage('Test') {

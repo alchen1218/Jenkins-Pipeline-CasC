@@ -8,15 +8,15 @@ pipeline {
             steps {
                 echo 'Initializing....'
                 echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                buildDescription "Executed @ ${NODE_NAME}"
+                buildDescription "Executed @ ${env.NODE_NAME.split()[5]}"
             }
         }
         stage('Build') {
             steps {
                 
                 echo 'Building....'
-                echo "NODE NAME: ${env.node_name}"
-                echo "NODE LABEL: ${env.node_labels.split()[5]}"
+                echo "NODE NAME: ${env.NODE_NAME}"
+                echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
                 echo "${WORKSPACE}"
             }
         }
@@ -26,8 +26,8 @@ pipeline {
             }
             steps {
                 echo "'Testing....'"
-                echo "NODE NAME: ${env.node_name}"
-                echo "NODE LABEL: ${env.node_labels.split()[5]}"
+                echo "NODE NAME: ${env.NODE_NAME}"
+                echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
                 deleteDir() /* clean up our workspace */
             }
         }

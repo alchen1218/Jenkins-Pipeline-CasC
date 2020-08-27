@@ -15,11 +15,7 @@ pipeline {
                 echo 'Building....'
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
-                sh 'ls -l'
-                dir ('foo') {
-                    writeFile file:'dummy', text:''
-                }
-                sh 'ls -l'
+                sh "mkdir directory"
             }
         }
         stage('Test') {

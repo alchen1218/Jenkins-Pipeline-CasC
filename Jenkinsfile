@@ -9,6 +9,7 @@ pipeline {
                 echo 'Building....'
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
+                mkdir non-fdb-workplace
             }
         }
         stage('Test') {
@@ -19,6 +20,7 @@ pipeline {
                 echo "'Testing....'"
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"
+                mkdir fdb-workplace
             }
         }
         stage('Running in Parallel') {

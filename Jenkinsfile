@@ -12,9 +12,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                def username = 'Jenkins'
-                echo 'Hello Mr. ${username}'
-                echo "I said, Hello Mr. ${username}"
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo 'Building....'
                 echo "NODE NAME: ${env.node_name}"
                 echo "NODE LABEL: ${env.node_labels.split()[5]}"

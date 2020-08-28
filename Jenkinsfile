@@ -25,9 +25,16 @@ pipeline {
                 }
             }
         }
-        stage("List ENV vars") {
+        stage("ENV vars") {
+            environment {
+                USER_PATH = "/home/alan_test"
+                OTHER_USER = "tester"
+            }
             steps {
                 sh "printenv | sort"
+                echo "OG user is ${env.USER_NAME} (type: ${env.USER_NAME.class})"
+                sh 'echo OG user is $USER_NAME'
+                echo "Other user: (${env.OTHER_USER})'s path is: ${env.USER_PATH}"
             }
         }
         stage("Build NON-FDB") {
@@ -41,8 +48,6 @@ pipeline {
                     def new_name = "Sophie"
                     echo "New user is ${new_name}"
                 }
-                echo "OG user is ${env.USER_NAME} (type: ${env.USER_NAME.class})"
-                sh 'echo OG user is $USER_NAME'
             }
         }
         stage("Test FDB") {

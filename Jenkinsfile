@@ -11,9 +11,8 @@ pipeline {
                 buildDescription "Executed @ ${env.NODE_LABELS.split()[5]}"
                 echo "${env.PATH}"
                 script {
-                    sh "cd ${WORKSPACE}"
-                    sh "pwd"
-                    sh 'mvn --version'
+                    def disk_size = sh(script: "df / --output=avail | tail -1", returnStdout: true).trim() as Integer
+                    println("disk_size = ${disk_size}")
                 }
             }
         }

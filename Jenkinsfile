@@ -54,6 +54,9 @@ pipeline {
             when {
                 branch "testing"
             }
+            steps{
+                sh "mkdir hello_world"
+            }
         }
         stage('Running in Parallel NON-FDB') {
             steps {

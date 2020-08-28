@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'non-fdb-test'
+        label "non-fdb-test"
     }
     environment {
         PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
@@ -14,7 +14,7 @@ pipeline {
         stage("Initialization"){
             
             steps {
-                echo 'Initializing....'
+                echo "Initializing...."
                 echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 buildDescription "Executed @ ${env.NODE_LABELS.split()[5]}"
                 echo "${env.PATH}"
@@ -28,10 +28,10 @@ pipeline {
                 sh "printenv | sort"
             }
         }
-        stage('Build NON-FDB') {
+        stage("Build NON-FDB") {
             steps {
                 echo "${env.PATH}"
-                echo 'Building....'
+                echo "Building...."
                 echo "NODE NAME: ${env.NODE_NAME}"
                 echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
                 echo "${WORKSPACE}"
@@ -41,12 +41,12 @@ pipeline {
                 }
             }
         }
-        stage('Test FDB') {
+        stage("Test FDB") {
             agent { 
-                label 'fdb-test' 
+                label "fdb-test" 
             }
             steps {
-                echo "'Testing....'"
+                echo "Testing...."
                 echo "NODE NAME: ${env.NODE_NAME}"
                 echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
                 script {
@@ -61,7 +61,7 @@ pipeline {
                 cleanWs()
             }
         }
-        stage('Condidition Stage') {
+        stage("Condidition Stage") {
             when {
                 branch "testing"
             }
@@ -69,7 +69,7 @@ pipeline {
                 sh "mkdir hello_world"
             }
         }
-        stage('Running in Parallel NON-FDB') {
+        stage("Running in Parallel NON-FDB") {
             steps {
                 parallel(
                     a: {
@@ -84,25 +84,25 @@ pipeline {
     }
     post {
         always {
-            echo 'One way or another, I have finished'
+            echo "One way or another, I have finished"
             cleanWs() /* clean up our workspace */
         }
         success {
-            echo 'I succeeded!'
-            slackSend channel: '#testing-jenkinsfile-pipeline',
-                  color: 'good',
+            echo "I succeeded!"
+            slackSend channel: "#testing-jenkinsfile-pipeline",
+                  color: "good",
                   message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
         }
         unstable {
-            echo 'I am unstable'
-            slackSend channel: '#testing-jenkinsfile-pipeline',
-                  color: 'bad',
+            echo "I am unstable"
+            slackSend channel: "#testing-jenkinsfile-pipeline",
+                  color: "bad",
                   message: "The pipeline ${currentBuild.fullDisplayName} is unstable."
         }
         failure {
-            echo 'I failed'
-            slackSend channel: '#testing-jenkinsfile-pipeline',
-                  color: 'bad',
+            echo "I failed"
+            slackSend channel: "#testing-jenkinsfile-pipeline",
+                  color: "bad",
                   message: "The pipeline ${currentBuild.fullDisplayName} has failed."
         }
         // changed {

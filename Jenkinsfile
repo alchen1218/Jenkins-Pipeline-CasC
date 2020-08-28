@@ -50,7 +50,6 @@ pipeline {
                 parallel(
                     hello: {
                         echo "building in parallel 1"
-                        echo "${name}"
                     },
                     world: {
                         echo "building in parallel 2"

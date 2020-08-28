@@ -51,7 +51,7 @@ pipeline {
                 sh "ls"
                 sh "pwd"
                 sh "mvn --version"
-                sh "python --version"
+                sh "python3 --version"
                 sh "java --version"
                 cleanWs()
             }

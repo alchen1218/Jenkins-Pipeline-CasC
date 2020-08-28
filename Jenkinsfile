@@ -42,9 +42,7 @@ pipeline {
                     echo "New user is ${new_name}"
                 }
                 echo "OG user is ${USER_NAME}"
-                sh "echo OG user is ${USER_NAME}"
-                echo "test"
-                sh 'echo OG user is $USER_NAME}'
+                sh 'echo OG user is $USER_NAME'
             }
         }
         stage("Test FDB") {

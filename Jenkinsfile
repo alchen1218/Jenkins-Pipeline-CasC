@@ -38,6 +38,7 @@ pipeline {
 
                 script {
                     env.USER_GROUP = "users"
+                    env.TRIGGER_NEXT = true
                 }
                 sh 'echo Current user group is $USER_GROUP'
 
@@ -45,6 +46,16 @@ pipeline {
                     echo "Current yser password is ${env.USER_PWD}"
                     sh 'echo Current yser is admin? $USER_IS_ADMIN'
                 }
+            }
+        }
+        stage("Trigger on Boolean") {
+            when {
+                expression {
+                    env.TRIFFER_NEXT.toBoolean() == true
+                }
+            }
+            steps {
+                echo "Triggered this step because of env var boolean in previous stage"
             }
         }
         stage("Build NON-FDB") {

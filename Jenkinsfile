@@ -37,7 +37,6 @@ pipeline {
                 label 'fdb-test' 
             }
             steps {
-                cleanWs()
                 echo "'Testing....'"
                 echo "NODE NAME: ${env.NODE_NAME}"
                 echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
@@ -62,7 +61,7 @@ pipeline {
     post {
         always {
             echo 'One way or another, I have finished'
-            deleteDir() /* clean up our workspace */
+            cleanWs() /* clean up our workspace */
         }
         success {
             echo 'I succeeded!'

@@ -10,6 +10,8 @@ pipeline {
                 echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 buildDescription "Executed @ ${env.NODE_LABELS.split()[5]}"
                 echo "${env.PATH}"
+                cd ${WORKSPACE}
+                pwd
                 sh 'mvn --version'
             }
         }

@@ -26,8 +26,10 @@ pipeline {
                 echo "NODE NAME: ${env.NODE_NAME}"
                 echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
                 echo "${WORKSPACE}"
-                def name = "Alan"
-                echo "${name}"
+                script {
+                    def name = "Alan"
+                    echo "${name}"
+                }
             }
         }
         stage('Test') {

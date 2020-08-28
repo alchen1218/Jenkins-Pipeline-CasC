@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Initialization"){
             environment {
-                PATH = "/usr/local/bin:${env.PATH}"
+                PATH+EXTRA = "/usr/sbin:/usr/bin:/sbin:/bin"
             }
             steps {
                 echo 'Initializing....'

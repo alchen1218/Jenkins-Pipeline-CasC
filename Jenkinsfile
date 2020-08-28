@@ -50,6 +50,11 @@ pipeline {
                 cleanWs()
             }
         }
+        stage('Condidition Stage') {
+            when {
+                branch "testing"
+            }
+        }
         stage('Running in Parallel NON-FDB') {
             steps {
                 parallel(

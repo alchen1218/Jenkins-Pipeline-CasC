@@ -41,7 +41,7 @@ pipeline {
                     def new_name = "Sophie"
                     echo "New user is ${new_name}"
                 }
-                echo "OG user is ${USER_NAME}"
+                echo "OG user is ${env.USER_NAME} (type: ${env.USER_NAME.class})"
                 sh 'echo OG user is $USER_NAME'
             }
         }

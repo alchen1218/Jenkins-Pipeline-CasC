@@ -58,13 +58,21 @@ pipeline {
                 echo "Triggered this step because of env var boolean in previous stage"
             }
         }
+        stage("Caputuring outputs") { 
+            environment {
+                COUNT_FILES = sh(script: "ls -la ${env.WORKSPACE} | tail -n +4 | wc -l", returnStdout: true).trim
+            }
+            steps {
+                echo "There are ${env.COUNT_FILES} in ${env.WORKSPACE} folder."
+            }
+        }
         stage("Build NON-FDB") {
             steps {
                 echo "${env.PATH}"
                 echo "Building...."
                 echo "NODE NAME: ${env.NODE_NAME}"
                 echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
-                echo "${WORKSPACE}"
+                echo "${env.WORKSPACE}"
                 script { 
                     def new_name = "Sophie"
                     echo "New user is ${new_name}"

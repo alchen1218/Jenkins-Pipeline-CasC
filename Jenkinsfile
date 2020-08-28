@@ -23,6 +23,11 @@ pipeline {
                 }
             }
         }
+        stage("List ENV vars") {
+            steps {
+                sh "printenv | sort"
+            }
+        }
         stage('Build NON-FDB') {
             steps {
                 echo "${env.PATH}"

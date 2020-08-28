@@ -3,7 +3,7 @@ pipeline {
         label 'non-fdb-test'
     }
     environment {
-                PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
+        PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
     }
 
     stages {
@@ -15,28 +15,19 @@ pipeline {
                 buildDescription "Executed @ ${env.NODE_LABELS.split()[5]}"
                 echo "${env.PATH}"
                 script {
-                    def disk_size = sh(script: "df / --output=avail | tail -1", returnStdout: true).trim() as Integer
-                    println("disk_size = ${disk_size}")
-                    sh "mkdir testing"
+                    sh "mkdir non-fdb-workspace"
                 }
             }
         }
         stage('Build') {
             steps {
-                script {
-                    echo "${env.PATH}"
-                    echo 'Building....'
-                    echo "NODE NAME: ${env.NODE_NAME}"
-                    echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
-                    echo "${WORKSPACE}"
-                    def name = "Alan"
-                    echo "${name}"
-                    script {
-                        def disk_size = sh(script: "df / --output=avail | tail -1", returnStdout: true).trim() as Integer
-                        println("disk_size = ${disk_size}")
-                        sh "mkdir testing"
-                }
-                }
+                echo "${env.PATH}"
+                echo 'Building....'
+                echo "NODE NAME: ${env.NODE_NAME}"
+                echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
+                echo "${WORKSPACE}"
+                def name = "Alan"
+                echo "${name}"
             }
         }
         stage('Test') {
@@ -47,15 +38,19 @@ pipeline {
                 echo "'Testing....'"
                 echo "NODE NAME: ${env.NODE_NAME}"
                 echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
+                script {
+                    sh "mkdir fdb-workspace"
+                }
             }
         }
         stage('Running in Parallel') {
             steps {
                 parallel(
-                    a: {
+                    hello: {
                         echo "building in parallel 1"
+                        echo "${name}"
                     },
-                    b: {
+                    world: {
                         echo "building in parallel 2"
                     }
                 )

@@ -5,6 +5,10 @@ pipeline {
     environment {
         PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
     }
+    options {
+        timestamps()
+        ansiColor("xterms")
+    }
 
     stages {
         stage("Initialization"){

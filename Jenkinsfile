@@ -9,9 +9,12 @@ pipeline {
                 echo 'Initializing....'
                 echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 buildDescription "Executed @ ${env.NODE_LABELS.split()[5]}"
-                // echo "${env.PATH}"
-                sh "pwd"
-                sh 'mvn --version'
+                echo "${env.PATH}"
+                script {
+                    cd "${WORKSPACE}"
+                    sh "pwd"
+                    sh 'mvn --version'
+                }
             }
         }
         stage('Build') {

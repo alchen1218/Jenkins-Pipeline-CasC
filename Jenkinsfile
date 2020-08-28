@@ -19,7 +19,7 @@ pipeline {
                     echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
                     echo "${WORKSPACE}"
                     def name = "Alan"
-                    echo "${name}""
+                    echo "${name}"
                 }
             }
         }

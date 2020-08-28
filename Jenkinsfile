@@ -49,6 +49,7 @@ pipeline {
                 }
                 sh "mkdir hello_world"
                 sh "ls"
+                sh "pwd"
                 cleanWs()
             }
         }

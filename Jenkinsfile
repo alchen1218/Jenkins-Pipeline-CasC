@@ -20,7 +20,11 @@ pipeline {
                     echo "${WORKSPACE}"
                     def name = "Alan"
                     echo "${name}"
-                    sh "mkdir ${name}"
+
+                    def localFolder = products[params.PRODUCTS].local
+                    if (!fileExists(file: localFolder)){
+                        echo "HELLO WORLD"
+                    }
                 }
             }
         }

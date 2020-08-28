@@ -66,25 +66,25 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
-            slackSend channel: '#alan-test-jenkinsfile-pipeline',
+            slackSend channel: '#testing-jenkinsfile-pipeline',
                   color: 'good',
                   message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
         }
         unstable {
             echo 'I am unstable'
-            slackSend channel: '#alan-test-jenkinsfile-pipeline',
+            slackSend channel: '#testing-jenkinsfile-pipeline',
                   color: 'bad',
                   message: "The pipeline ${currentBuild.fullDisplayName} is unstable."
         }
         failure {
             echo 'I failed'
-            slackSend channel: '#alan-test-jenkinsfile-pipeline',
+            slackSend channel: '#testing-jenkinsfile-pipeline',
                   color: 'bad',
                   message: "The pipeline ${currentBuild.fullDisplayName} has failed."
         }
         // changed {
         //     echo 'Things were different before...'
-        //     slackSend channel: '#alan-test-jenkinsfile-pipeline',
+        //     slackSend channel: '#testing-jenkinsfile-pipeline',
         //           color: 'good',
         //           message: "Something in the pipeline ${currentBuild.fullDisplayName} has changed."
         // }

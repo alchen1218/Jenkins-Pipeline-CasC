@@ -60,7 +60,7 @@ pipeline {
         }
         stage("Caputuring outputs") { 
             environment {
-                COUNT_FILES = sh(script: "ls -la ${env.WORKSPACE} | tail -n +4 | wc -l", returnStdout: true).trim
+                COUNT_FILES = sh(script: "ls -la ${env.WORKSPACE} | tail -n +4 | wc -l", returnStdout: true).trim()
             }
             steps {
                 echo "There are ${env.COUNT_FILES} in ${env.WORKSPACE} folder."

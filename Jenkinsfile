@@ -11,7 +11,7 @@ pipeline {
                 buildDescription "Executed @ ${env.NODE_LABELS.split()[5]}"
                 echo "${env.PATH}"
                 script {
-                    cd "${WORKSPACE}"
+                    sh "cd ${WORKSPACE}"
                     sh "pwd"
                     sh 'mvn --version'
                 }

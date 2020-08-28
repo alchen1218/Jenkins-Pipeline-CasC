@@ -51,7 +51,7 @@ pipeline {
         stage("Trigger on Boolean") {
             when {
                 expression {
-                    env.TRIFFER_NEXT.toBoolean() == true
+                    env.TRIGGER_NEXT.toBoolean() == true
                 }
             }
             steps {

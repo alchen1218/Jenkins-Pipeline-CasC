@@ -50,6 +50,9 @@ pipeline {
                 sh "mkdir hello_world"
                 sh "ls"
                 sh "pwd"
+                sh "mvn --version"
+                sh "python --version"
+                sh "java --version"
                 cleanWs()
             }
         }
@@ -64,10 +67,10 @@ pipeline {
         stage('Running in Parallel NON-FDB') {
             steps {
                 parallel(
-                    hello: {
+                    a: {
                         echo "building in parallel 1"
                     },
-                    world: {
+                    b: {
                         echo "building in parallel 2"
                     }
                 )

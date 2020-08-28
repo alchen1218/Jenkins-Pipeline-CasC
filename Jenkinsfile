@@ -23,6 +23,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    echo "${env.PATH}"
                     echo 'Building....'
                     echo "NODE NAME: ${env.NODE_NAME}"
                     echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"

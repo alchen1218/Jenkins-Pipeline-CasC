@@ -35,6 +35,16 @@ pipeline {
                 echo "OG user is ${env.USER_NAME} (type: ${env.USER_NAME.class})"
                 sh 'echo OG user is $USER_NAME'
                 echo "Other user: (${env.OTHER_USER})'s path is: ${env.USER_PATH}"
+
+                script {
+                    env.USER_GROUP = "users"
+                }
+                sh 'echo Current user group is $USER_GROUP'
+
+                withEnv(["USER_PWD=secret", "USER_IS_ADMIN=false"]) {
+                    echo "Current yser password is ${env.USER_PWD}"
+                    sh 'echo Current yser is admin? $USER_IS_ADMIN'
+                }
             }
         }
         stage("Build NON-FDB") {

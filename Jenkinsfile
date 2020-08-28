@@ -19,7 +19,7 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+        stage('Build NON-FDB') {
             steps {
                 echo "${env.PATH}"
                 echo 'Building....'
@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        stage('Test FDB') {
             agent { 
                 label 'fdb-test' 
             }
@@ -43,9 +43,10 @@ pipeline {
                 script {
                     sh "mkdir fdb-workspace"
                 }
+                cleanWs()
             }
         }
-        stage('Running in Parallel') {
+        stage('Running in Parallel NON-FDB') {
             steps {
                 parallel(
                     hello: {

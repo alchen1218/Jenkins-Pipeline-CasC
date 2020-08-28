@@ -61,9 +61,11 @@ pipeline {
         stage("Caputuring outputs") { 
             environment {
                 COUNT_FILES = sh(script: "ls -la ${env.WORKSPACE} | tail -n +4 | wc -l", returnStdout: true).trim()
+                FILES = sh(script: "ls ${env.WORKSPACE}", returnStdout: true).trim()
             }
             steps {
-                echo "There are ${env.COUNT_FILES} in ${env.WORKSPACE} folder."
+                echo "There are ${env.COUNT_FILES} files in ${env.WORKSPACE} folder."
+                echo "The files are: ${env.FILES}"
             }
         }
         stage("Build NON-FDB") {

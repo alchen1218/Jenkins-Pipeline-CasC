@@ -4,6 +4,7 @@ pipeline {
     }
     environment {
         PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
+        USER_NAME = "Alan"
     }
     options {
         timestamps()
@@ -37,9 +38,13 @@ pipeline {
                 echo "NODE LABEL: ${env.NODE_LABELS.split()[5]}"
                 echo "${WORKSPACE}"
                 script {
-                    def name = "Alan"
-                    echo "${name}"
+                    def new_name = "Sophie"
+                    echo "New user is ${new_name}"
                 }
+                def new_name = "Sophie"
+                echo "New user is ${new_name}"
+                echo "OG user is ${USER_NAME}"
+
             }
         }
         stage("Test FDB") {

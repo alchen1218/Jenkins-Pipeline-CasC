@@ -20,6 +20,7 @@ pipeline {
                     echo "${WORKSPACE}"
                     def name = "Alan"
                     echo "${name}"
+                    sh "mkdir ${name}"
                 }
             }
         }

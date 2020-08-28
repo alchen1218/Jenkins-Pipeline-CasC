@@ -2,12 +2,13 @@ pipeline {
     agent {
         label 'non-fdb-test'
     }
+    environment {
+                PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
+    }
 
     stages {
         stage("Initialization"){
-            environment {
-                PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
-            }
+            
             steps {
                 echo 'Initializing....'
                 echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"

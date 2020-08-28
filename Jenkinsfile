@@ -5,6 +5,9 @@ pipeline {
 
     stages {
         stage("Initialization"){
+            environment {
+                PATH = "/usr/local/bin:${env.PATH}"
+            }
             steps {
                 echo 'Initializing....'
                 echo "Running job: ${env.JOB_NAME}, build: ${env.BUILD_ID} on ${env.JENKINS_URL}"

@@ -47,6 +47,7 @@ pipeline {
                 script {
                     sh "mkdir fdb-workspace"
                 }
+                sh "mkdir hello_world"
                 cleanWs()
             }
         }

@@ -9,28 +9,30 @@ pipeline {
         timestamps()
         ansiColor("xterm")
     }
-    stage("Initialization") {
-        steps {
-            buildName "#${BUILD_NUMBER}"
-            buildDescription "Executed @ ${NODE_NAME}"
+    stages {
+        stage("Initialization") {
+            steps {
+                buildName "#${BUILD_NUMBER}"
+                buildDescription "Executed @ ${NODE_NAME}"
+            }
         }
-    }
-    stage('Check out #SOME repo') {
-        steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-                        doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
-                        userRemoteConfigs: [[credentialsId: 'alchen',
-                        url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git']]])
-            
-            sh "ls -lat"
-            sh "ls"
+        stage('Check out #SOME repo') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                            doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
+                            userRemoteConfigs: [[credentialsId: 'alchen',
+                            url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git']]])
+                
+                sh "ls -lat"
+                sh "ls"
 
-            git branch: 'master',
-                credentialsId: 'alchen',
-                url: 'git@github.com:alchen1218/package_cloud_test.git'
+                git branch: 'master',
+                    credentialsId: 'alchen',
+                    url: 'git@github.com:alchen1218/package_cloud_test.git'
 
-            sh "ls -lat"
-            sh "ls"
+                sh "ls -lat"
+                sh "ls"
+            }
         }
     }
 }

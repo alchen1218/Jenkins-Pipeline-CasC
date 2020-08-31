@@ -20,14 +20,14 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                             doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
-                            userRemoteConfigs: [[credentialsId: 'alchen',
+                            userRemoteConfigs: [[credentialsId: 'alchen (eso-jenkins-ami-alan)',
                             url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git']]])
                 
                 sh "ls -lat"
                 sh "ls"
 
                 git branch: 'master',
-                    credentialsId: 'alchen',
+                    credentialsId: 'alchen (eso-jenkins-ami-alan)',
                     url: 'git@github.com:alchen1218/package_cloud_test.git'
 
                 sh "ls -lat"

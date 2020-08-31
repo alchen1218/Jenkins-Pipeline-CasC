@@ -18,18 +18,18 @@ pipeline {
         }
         stage('Check out #SOME repo') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-                            doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
-                            userRemoteConfigs: [[credentialsId: 'alchen (eso-jenkins-ami-alan)',
-                            url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git']]])
+                // checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                //             doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
+                //             userRemoteConfigs: [[credentialsId: 'alchen (eso-jenkins-ami-alan)',
+                //             url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git']]])
                 
-                sh "ls -lat"
-                sh "ls"
-                sh "pwd"
+                // sh "ls -lat"
+                // sh "ls"
+                // sh "pwd"
 
                 git branch: 'master',
                     credentialsId: 'alchen (eso-jenkins-ami-alan)',
-                    url: 'git@github.com:alchen1218/package_cloud_test.git'
+                    url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git'
 
                 sh "ls -lat"
                 sh "ls"

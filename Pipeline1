@@ -37,10 +37,13 @@ pipeline {
             }
         }
         stage('Run script'){
-            sh "python --version"
-            sh "python3 --version"
-            sh "python HelloWorld.py"
-            sh "python3 HelloWorld.py"
+            steps {
+                sh "python --version"
+                sh "python3 --version"
+                sh "python HelloWorld.py"
+                sh "python3 HelloWorld.py"
+            }
+            
         }
     }
 }

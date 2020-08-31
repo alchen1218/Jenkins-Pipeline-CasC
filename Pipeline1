@@ -25,6 +25,7 @@ pipeline {
                 
                 sh "ls -lat"
                 sh "ls"
+                sh "pwd"
 
                 git branch: 'master',
                     credentialsId: 'alchen (eso-jenkins-ami-alan)',
@@ -32,6 +33,7 @@ pipeline {
 
                 sh "ls -lat"
                 sh "ls"
+                sh "pwd"
             }
         }
     }

@@ -1,0 +1,26 @@
+pipeline {
+    agent {
+        label "non-fdb-test"
+    }
+    environment {
+        PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
+    }
+    options {
+        timestamps()
+        ansiColor("xterm")
+    }
+    stage("Initialization") {
+        steps {
+            buildName "#${BUILD_NUMBER}"
+            buildDescription "Executed @ ${NODE_NAME}"
+        }
+    }
+    stage('Check out #SOME repo') {
+        steps {
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                        doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
+                        userRemoteConfigs: [[credentialsId: 'wf-jenkins-github_ssh_key',
+                        url: 'git@github.com:sunnylabs/devops.git']]])
+        }
+    }
+}

@@ -41,8 +41,8 @@ pipeline {
             steps {
                 sh "python --version"
                 sh "python3 --version"
-                sh "python HelloWorld.py"
-                sh "python3 HelloWorld.py"
+                sh "python ${WORKSPACE}/HERE/HelloWorld.py"
+                sh "python3 ${WORKSPACE}/HERE/HelloWorld.py"
             }
             
         }

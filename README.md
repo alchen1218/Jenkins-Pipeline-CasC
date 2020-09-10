@@ -1,3 +1,4 @@
-# pipeline-jenkinsfile-test
-#testing
-#testing again 1...2...3...4...5...6...7...8...9...10...11...12...13
+This repo is for all Jenkins declarative pipeline script related work.
+
+Everything is set up and testing in jenkins-staging first, then added to jenkins-dev.
+

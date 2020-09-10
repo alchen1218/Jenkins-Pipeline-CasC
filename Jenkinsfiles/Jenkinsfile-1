@@ -25,6 +25,28 @@ pipeline {
                 }
             }
         }
+        stage('Check out #SOME repo. two different ways') {
+            steps {
+                // checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                //             doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
+                //             userRemoteConfigs: [[credentialsId: 'alchen (eso-jenkins-ami-alan)',
+                //             url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git']]])
+
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                        doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'HERE']], submoduleCfg: [],
+                        userRemoteConfigs: [[credentialsId: 'alchen (eso-jenkins-ami-alan)',
+                        url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git']]])
+            
+                git branch: 'master',
+                    credentialsId: 'alchen (eso-jenkins-ami-alan)',
+                    url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git'
+
+                sh "ls -lat"
+                sh "ls"
+                sh "pwd"
+            }
+        }
         stage("ENV vars") {
             environment {
                 USER_PATH = "/home/alan_test"

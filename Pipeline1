@@ -14,6 +14,7 @@ pipeline {
             steps {
                 buildName "#${BUILD_NUMBER}"
                 buildDescription "Executed @ ${NODE_NAME}"
+                cleanWs()
             }
         }
         stage('Check out #SOME repo') {
@@ -45,6 +46,27 @@ pipeline {
                 sh "python3 ${WORKSPACE}/HERE/HelloWorld.py"
             }
             
+        }
+    }
+    post {
+        always {
+            echo "One way or another, I have finished"
+        }
+        success {
+            slackSend(color: "good",
+                      channel: "#testing-jenkinsfile-pipeline",
+                      message: "SUCCESSFUL: ${env.JOB_NAME}: (<${env.BUILD_URL}|Open>)")
+        }
+        failure {
+            slackSend(color: "danger",
+                      channel: "#testing-jenkinsfile-pipeline",
+                      message: "FAILED: ${env.JOB_NAME}: (<${env.BUILD_URL}|Open>)")
+
+        }
+        aborted {
+            slackSend(color: "bad",
+                      channel: "#testing-jenkinsfile-pipeline",
+                      message: "ABORTED: ${env.JOB_NAME}: (<${env.BUILD_URL}|Open>)")
         }
     }
 }

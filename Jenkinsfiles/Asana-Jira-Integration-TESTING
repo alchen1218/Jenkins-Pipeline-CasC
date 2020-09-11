@@ -32,7 +32,7 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                         doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', 
-                        relativeTargetDir: 'terraform-TESITNG']], submoduleCfg: [],
+                        relativeTargetDir: 'terraform-TESTING']], submoduleCfg: [],
                         userRemoteConfigs: [[credentialsId: '98834d5d-1e71-46c5-9f67-ab42d52b3f0d',
                         url: 'git@github.com:alchen1218/Hello-World.git']]])
             }

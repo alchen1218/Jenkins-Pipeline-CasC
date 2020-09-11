@@ -4,8 +4,8 @@ pipeline {
     }
     environment {
         PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
-        TERRAFORM = "$PATH:~/usr/local/bin/terraform"
-        TERRAGRUNT = "$PATH:~/usr/local/bin/terragrunt"
+        terraform = "$PATH:~/usr/local/bin/terraform"
+        terragrunt = "$PATH:~/usr/local/bin/terragrunt"
     }
     options {
         timestamps()

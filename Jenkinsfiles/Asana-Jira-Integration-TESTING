@@ -38,10 +38,6 @@ pipeline {
             }
         }
         stage('Run script in repo 1 which will execute script in repo 2'){
-            script {
-                def tfHome = tool name: ‘Terraform’
-                env.PATH = “${tfHome}:${env.PATH}”
-            }
             steps {
                 sh "ls"
                 sh "terraform --version"

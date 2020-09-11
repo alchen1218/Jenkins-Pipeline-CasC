@@ -21,7 +21,7 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                         doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', 
-                        relativeTargetDir: 'HERE']], submoduleCfg: [],
+                        relativeTargetDir: 'HELLO-WORLD']], submoduleCfg: [],
                         userRemoteConfigs: [[credentialsId: 'alchen (eso-jenkins-ami-alan)',
                         url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git']]])
 
@@ -34,8 +34,8 @@ pipeline {
             steps {
                 sh "python --version"
                 sh "python3 --version"
-                sh "python ${WORKSPACE}/HERE/HelloWorld.py"
-                sh "python3 ${WORKSPACE}/HERE/HelloWorld.py"
+                sh "python ${WORKSPACE}/HELLO-WORLD/HelloWorld.py"
+                sh "python3 ${WORKSPACE}/HELLO-WORLD/HelloWorld.py"
             }
         }
     }

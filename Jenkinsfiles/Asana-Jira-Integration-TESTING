@@ -4,8 +4,6 @@ pipeline {
     }
     environment {
         PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
-        terraform = "$PATH:~/usr/local/bin/terraform"
-        terragrunt = "$PATH:~/usr/local/bin/terragrunt"
     }
     options {
         timestamps()
@@ -42,6 +40,8 @@ pipeline {
         stage('Run script in repo 1 which will execute script in repo 2'){
             steps {
                 sh "ls"
+                sh "export PATH='$PATH:~/usr/local/bin/terraform'"
+                sh "export PATH='$PATH:~/usr/local/bin/terragrunt'"
                 sh "terraform --version"
                 sh "terragrunt --version"
                 // sh "./asana-jira-integration-TESTING/build_and_deploy.sh"

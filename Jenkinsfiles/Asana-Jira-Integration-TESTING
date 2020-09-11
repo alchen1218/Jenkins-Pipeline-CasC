@@ -23,7 +23,7 @@ pipeline {
                         doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', 
                         relativeTargetDir: 'asana-jira-integration-TESTING']], submoduleCfg: [],
                         userRemoteConfigs: [[credentialsId: 'alchen (eso-jenkins-ami-alan)',
-                        url: 'git@github.com:alchen1218/Hello-World.gitt']]])
+                        url: 'git@github.com:alchen1218/Hello-World.git']]])
 
             }
         }

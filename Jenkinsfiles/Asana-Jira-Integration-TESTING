@@ -3,7 +3,7 @@ pipeline {
         label "non-fdb-test"
     }
     environment {
-        PATH = "/usr/sbin:/usr/local/bin:/sbin:/local/bin"
+        PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
     }
     options {
         timestamps()

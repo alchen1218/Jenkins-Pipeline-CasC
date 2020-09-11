@@ -17,25 +17,32 @@ pipeline {
                 cleanWs()
             }
         }
-        stage('Check out #helloworld repo') {
+        stage('Check out #helloworld repo 1') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                         doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', 
-                        relativeTargetDir: 'HELLO-WORLD']], submoduleCfg: [],
+                        relativeTargetDir: 'HELLO-WORLD-1']], submoduleCfg: [],
                         userRemoteConfigs: [[credentialsId: 'alchen (eso-jenkins-ami-alan)',
-                        url: 'git@github.com:alchen1218/Jenkinsfile-hello-world.git']]])
+                        url: 'git@github.com:alchen1218/Hello-World.gitt']]])
 
-                sh "ls -lat"
-                sh "ls"
-                sh "pwd"
             }
         }
-        stage('Run script'){
+
+        stage('Check out #helloworld repo 2') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                        doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', 
+                        relativeTargetDir: 'HELLO-WORLD-2']], submoduleCfg: [],
+                        userRemoteConfigs: [[credentialsId: 'alchen (eso-jenkins-ami-alan)',
+                        url: 'git@github.com:alchen1218/Hello-World.git']]])
+            }
+        }
+        stage('Run script in repo 1 which will execute script in repo 2'){
             steps {
                 sh "python --version"
                 sh "python3 --version"
-                sh "python ${WORKSPACE}/HELLO-WORLD/HelloWorld.py"
-                sh "python3 ${WORKSPACE}/HELLO-WORLD/HelloWorld.py"
+                sh "python ${WORKSPACE}/HELLO-WORLD-1/HelloWorld.py"
+                sh "python3 ${WORKSPACE}/HELLO-WORLD-1/HelloWorld.py"
             }
         }
     }

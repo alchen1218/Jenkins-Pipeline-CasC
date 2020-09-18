@@ -45,7 +45,7 @@ pipeline {
                 sh "ls"
                 sh "/usr/local/bin/terraform --version"
                 sh "/usr/local/bin/terragrunt --version"
-                // sh "./asana-jira-integration-TESTING/build_and_deploy.sh"
+                sh "./asana-jira-integration-TESTING/build_and_deploy.sh"
             }
         }
     }

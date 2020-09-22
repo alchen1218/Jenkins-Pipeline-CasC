@@ -1,6 +1,6 @@
 pipeline {
     triggers {
-        pollSCM('* * * * *')
+        pollSCM('*/15 * * * *')
     }
     agent {
         label "non-fdb-test"

@@ -1,0 +1,89 @@
+def awsCredentials = [[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'jenkins-dev']]
+
+pipeline {
+    agent {
+        label "non-fdb-node"
+    }
+    tools {
+        maven "mvn-3.6.0"
+        go "golang-v1.14"
+    }
+    environment {
+        PATH = "/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin"
+        GO111MODULE = 'on'
+    }
+    options {
+        timestamps()
+        ansiColor("xterm")
+        timeout(time: 15, unit: "MINUTES")
+        withCredentials(awsCredentials)
+    }
+    stages {
+        stage("Initialization") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Install terraform provider for credstash secrets") {
+            steps {
+                sh "git clone https://github.com/sspinc/terraform-provider-credstash.git"
+                sh "cd terraform-provider-credstash/;go build -v -i -o terraform-provider-credstash;make install;"
+            }
+        }  
+        stage("Checkout asana-jira-integration repo") {
+            options {
+                timeout(time: 5, unit: "MINUTES")
+            }
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                          doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', 
+                          relativeTargetDir: 'asana-jira-integration']], submoduleCfg: [],
+                          userRemoteConfigs: [[credentialsId: '65537ee2-c84b-4b3a-9ef6-436286630d46',
+                          url: 'git@github.com:sunnylabs/asana-jira-integration.git']]])
+                script {
+                    mavenPOM = readMavenPom file: 'asana-jira-integration/pom.xml'
+                    env.POM_VERSION = mavenPOM.version
+                }
+            }
+        }
+        stage("Checkout terrform repo") {
+            options {
+                timeout(time: 5, unit: "MINUTES")
+            }
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                          doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', 
+                          relativeTargetDir: 'terraform']], submoduleCfg: [],
+                          userRemoteConfigs: [[credentialsId: '65537ee2-c84b-4b3a-9ef6-436286630d46',
+                          url: 'git@github.com:sunnylabs/terraform.git']]])
+                sh "cd ${WORKSPACE}/terraform/providers/; ./link-providers.sh"
+            }
+        }
+        stage("Run Asana Jira Integration") {
+            options {
+                timeout(time: 10, unit: "MINUTES")
+            }
+            steps {
+                sh "aws sts get-caller-identity"
+                // sh "cd ${WORKSPACE}/asana-jira-integration/;bash ${WORKSPACE}/asana-jira-integration/build_and_deploy.sh;"
+            }
+        }
+    }
+    post {
+        always {
+            buildName "#${env.BUILD_NUMBER} (POM version: ${env.POM_VERSION})"
+            buildDescription "Executed @ ${env.NODE_NAME}"
+            cleanWs()
+        }
+        success {
+            slackSend(color: "good",
+                      channel: "#testing-jenkinsfile-pipeline",
+                      message: "SUCCESSFUL: ${env.JOB_NAME}: (<${env.BUILD_URL}|Open>)")
+        }
+        failure {
+            slackSend(color: "danger",
+                      channel: "#testing-jenkinsfile-pipeline",
+                      message: "FAILED: ${env.JOB_NAME}: (<${env.BUILD_URL}|Open>)")
+        }
+    }
+}

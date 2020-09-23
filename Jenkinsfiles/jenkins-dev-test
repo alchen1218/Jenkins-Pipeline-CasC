@@ -2,7 +2,7 @@ def awsCredentials = [[$class: 'AmazonWebServicesCredentialsBinding', credential
 
 pipeline {
     agent {
-        label "fdb-node"
+        label "non-fdb-node"
     }
     tools {
         maven "mvn-3.6.0"

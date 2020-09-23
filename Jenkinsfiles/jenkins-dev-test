@@ -22,7 +22,7 @@ pipeline {
         stage("Initialization") {
             steps {
                 cleanWs()
-                sh "go --version"
+                sh "go version"
             }
         }
         stage("Install terraform provider for credstash secrets") {
